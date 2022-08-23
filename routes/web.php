@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $title = 'Home';
+    $products = Product::all();
     return view('public.home', compact('products','title'));
 })->name('home');
 
