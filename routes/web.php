@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\Public\CartController;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return "coba";
-    $products = Product::paginate(4);
+    return User::all();
     $title = 'Home';
     return view('public.home', compact('products','title'));
 })->name('home');
