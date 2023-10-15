@@ -76,7 +76,7 @@
                         <a href="{{ route('public.products.show', $product->id) }}" class="text-decoration-none text-dark">
                             <div class="product-item">
                                 <div class="product-img">
-                                    <b class="m-2 text-uppercase">{{ $product->toko->name }}</b>
+                                    
                                     <img src="{{ asset('uploads/image/' . $product->image) }}" class="img img-fluid"
                                         style="height: 250px;">
                                 </div>

@@ -52,7 +52,18 @@ class ProductController extends Controller
 
         $validatedData['user_id'] = auth()->id();
 
-        Product::create($validatedData);
+        $product = Product::create($validatedData);
+
+        $project = [
+            'greeting' => 'Halo Kak 👋',
+            'body' => 'PT.Singvlar Furniture telah menambahkan product ' . $product->name,
+            'thanks' => 'Terima Kasih 😁',
+            'actionText' => 'Lihat Produk',
+            'actionURL' => url('/products', $product->id),
+            'id' => 57
+        ];
+        $user = User::role('customer')->get();
+        Notification::send($user, new EmailNotification($project));
 
         return back();
     }
