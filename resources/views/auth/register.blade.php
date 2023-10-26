@@ -21,22 +21,40 @@
                 <form method="POST" action="{{ route('register') }}" class="needs-validation" novalidate="">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Nama Perusahaan</label>
+                        <label for="name">Nama</label>
                         <input id="name" type="text" class="form-control" name="name" tabindex="1" required
                             autofocus>
                         <div class="invalid-feedback">
                             Please fill in your name
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="alamat">Alamat Perusahaan</label>
+                        <label for="alamat">Alamat </label>
                         <input id="alamat" type="text" class="form-control" name="alamat" tabindex="1" required
                             autofocus>
                         <div class="invalid-feedback">
                             Please fill in your alamat
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="name">No.Telpon / WhatsApp</label>
+                        <input id="name" type="text" class="form-control" name="no_telepon" tabindex="1"
+                            required autofocus>
+                        <div class="invalid-feedback">
+                            Please fill in your no telepon
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Nama Perusahaan</label>
+                        <input id="name" type="text" class="form-control" name="nama_perusahaan" tabindex="1"
+                            required autofocus>
+                        <div class="invalid-feedback">
+                            Please fill in your nama perusahaan
+                        </div>
+                    </div>
+
+
 
 
                     <div class="form-group" hidden>
@@ -64,9 +82,7 @@
                             <div class="d-block">
                                 <label for="password" class="control-label">Password</label>
                                 <div class="float-right">
-                                    <a href="auth-forgot-password.html" class="text-small">
-                                        Forgot Password?
-                                    </a>
+
                                 </div>
                             </div>
                             <input id="password" type="password" class="form-control" name="password" tabindex="2"
@@ -89,9 +105,11 @@
 
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
+                            <input type="checkbox" name="remember" required class="custom-control-input" tabindex="3"
                                 id="remember-me">
-                            <label class="custom-control-label" for="remember-me">Remember Me</label>
+                            <label class="custom-control-label" for="remember-me">Saya setuju untuk menerima
+                                pemberitahuan melalui email setiap kali ada pembaruan produk, diskon, dan lain
+                                lain</label>
                         </div>
                     </div>
 

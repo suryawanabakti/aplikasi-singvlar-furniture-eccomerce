@@ -4,10 +4,10 @@
     <section class="section">
 
         <div class="section-header">
-            <h1>Products</h1>
+            <h1>Transactions</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item">Products</div>
+                <div class="breadcrumb-item">Transactions</div>
             </div>
         </div>
 
@@ -100,7 +100,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Daftar Produk </h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Daftar Transaksi </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

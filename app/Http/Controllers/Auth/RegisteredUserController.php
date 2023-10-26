@@ -33,19 +33,23 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'alamat' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required'],
+            'no_telepon' => ['required'],
+            'nama_perusahaan' => ['required']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'alamat' => $request->alamat,
             'email' => $request->email,
+            'nama_perusahaan' => $request->nama_perusahaan,
+            'no_telepon' => $request->no_telepon,
             'password' => Hash::make($request->password),
         ]);
 
@@ -55,8 +59,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if($request->role == 'admintoko')
-        {
+        if ($request->role == 'admintoko') {
             return redirect(RouteServiceProvider::DASHBOARD);
         }
         return redirect(RouteServiceProvider::HOME);

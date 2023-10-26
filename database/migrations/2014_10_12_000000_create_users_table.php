@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('alamat')->default('belum isi');
             $table->string('email')->unique();
             $table->string('password');
-         
+            $table->string('nama_perusahaan')->nullable();
+            $table->string('no_telepon')->nullable();
             $table->timestamps();
         });
     }

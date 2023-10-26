@@ -38,13 +38,15 @@
                     href="{{ route('admintoko.profile.index') }}"><i class="fas fa-user"></i> <span>Profile</span></a>
             </li>
             <li class="menu-header">Transaction</li>
-            <li class=" {{ Request::is('admintoko/transactions') ? 'active' : '' }}"><a class="nav-link"
+            <li class="{{ Request::is('admintoko/transactions') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admintoko.transactions.index') }}"><i class="fas fa-exchange-alt"></i>
-                    <span>Transactions</span></a></li>
+                    <span>Transactions <sup
+                            class="badge badge-primary">{{ DB::table('transactions')->where('status', 'process')->count() }}</sup></span></a>
+            </li>
             <li class="menu-header">Misc</li>
             <li class=" {{ Request::is('admintoko/events') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admintoko.events.index') }}"><i class="fas fa-calendar-check"></i>
-                    <span>Event</span></a>
+                    <span>Promo</span></a>
             </li>
             <li class=" {{ Request::is('admintoko/live-chat') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admintoko.live-chat.index') }}"><i class="fas fa-headphones"></i>

@@ -23,6 +23,8 @@ class User extends Authenticatable
         'alamat',
         'email',
         'password',
+        'no_telepon',
+        'nama_perusahaan'
     ];
 
     public function toko()
@@ -48,6 +50,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-   
 }

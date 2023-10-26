@@ -62,7 +62,9 @@
                 @auth
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0 show" data-bs-toggle="dropdown"
                         aria-label="Open user menu" aria-expanded="true">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+
+                        <span class="avatar avatar-sm"
+                            style="background-image: url(https://ui-avatars.com/api/?name={{ auth()->user()->name }})"></span>
                         <div class="d-none d-xl-block ps-2">
                             <div class="text-capitalize">{{ auth()->user()->name }}</div>
                             <div class="mt-1 small text-secondary text-capitalize">{{ auth()->user()->roles[0]->name }}
@@ -137,7 +139,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Event
+                                Promo
                             </span>
                         </a>
                     </li>

@@ -15,7 +15,9 @@ class LiveChatController extends Controller
             ->orderBy('created_at', 'desc')
             ->get() ?? null;
 
-        $chats = Chat::orderBy('created_at', 'asc')->take(15)->get();
+        $chats = Chat::orderBy('created_at', 'asc')->where(function ($query) {
+            // $query->where('user_id', auth()->id())->orWhere('user_id', 2);
+        })->take(15)->get();
         return view('public.livechat', compact('carts', 'chats'));
     }
 
