@@ -1,9 +1,9 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="index.html">SingvlarFurniture</a>
+        <a href="#">SingvlarFurniture</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html">SF</a>
+        <a href="#">SF</a>
     </div>
     <ul class="sidebar-menu">
 

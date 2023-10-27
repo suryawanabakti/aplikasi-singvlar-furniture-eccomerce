@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('pesan');
             $table->foreignIdFor(User::class);
+            $table->tinyInteger('is_admin')->default(0);
             $table->timestamps();
         });
     }

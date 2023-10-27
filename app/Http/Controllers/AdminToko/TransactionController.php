@@ -16,7 +16,7 @@ class TransactionController extends Controller
             Alert::info('Toko Belum Ada', 'silakan mengupdate toko terlebih dahulu');
             return view('admintoko.profile.index');
         }
-        $transactions = Transaction::where('toko_id', auth()->user()->toko->id ?? 0)->orderBy('created_at', 'desc')->get();
+        $transactions = Transaction::whereHas('user')->where('toko_id', auth()->user()->toko->id ?? 0)->orderBy('created_at', 'desc')->get();
 
         return view('admintoko.transactions.index', compact('transactions'));
     }

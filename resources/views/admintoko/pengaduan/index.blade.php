@@ -74,41 +74,44 @@
                                         <div class="container p-0">
                                             <div class="card">
                                                 <div class="row g-0">
-                                                    <div class="col-12 col-lg-12 col-xl-9">
+                                                    <div class="col-md-4">
+                                                        <div class="row">
+                                                            @foreach ($users as $user)
+                                                                <div class="col-md-12">
+                                                                    <a href="?user={{ $user->id }}"
+                                                                        class="text-decoration-none text-dark {{ $user->id == request('user') ? 'font-weight-bold' : '' }}">
+                                                                        <img alt="image"
+                                                                            src="https://ui-avatars.com/api/?name={{ $user->name }}"
+                                                                            class="rounded-circle mr-1">
+                                                                        {{ $user->name }}
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-8">
                                                         <div class="position-relative">
                                                             <div class="chat-messages p-4" id="bodyChat">
-                                                                <div class="chat-message-left pb-4">
-                                                                    <div>
-                                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                                            class="rounded-circle mr-1"
-                                                                            alt="Sharon Lessman" width="40"
-                                                                            height="40">
-                                                                        <div class="text-muted small text-nowrap mt-2">
-                                                                            2:44 am</div>
-                                                                    </div>
-                                                                    <div class="flex-shrink-1  rounded py-2 px-3 ml-3">
-                                                                        <div class="font-weight-bold mb-1">Bot</div>
-                                                                        Assalamualaikum 👋. ada yang bisa saya bantu
-                                                                        kak? 😊
-                                                                    </div>
-                                                                </div>
                                                                 @foreach ($chats as $chat)
                                                                     <div
-                                                                        class="chat-message-{{ auth()->id() == $chat->user_id ? 'right' : 'left' }} pb-4">
+                                                                        class="chat-message-{{ $chat->is_admin == 1 ? 'right' : 'left' }} pb-4">
                                                                         <div>
-                                                                            <img src="https://ui-avatars.com/api/?name={{ $chat->user->name }}"
+                                                                            <img src="https://ui-avatars.com/api/?name={{ $chat->is_admin == 1 ? auth()->user()->name : $chat->user->name }}"
                                                                                 class="rounded-circle mr-1"
                                                                                 alt="Sharon Lessman" width="40"
                                                                                 height="40">
                                                                             <div
                                                                                 class="text-muted small text-nowrap mt-2">
-                                                                                {{ $chat->created_at->format('H:i') }}
+                                                                                {{ $chat->created_at->addHour(8)->format('H:i') }}
                                                                             </div>
                                                                         </div>
                                                                         <div
                                                                             class="flex-shrink-1  rounded py-2 px-3 ml-3">
                                                                             <div class="font-weight-bold mb-1">
-                                                                                {{ $chat->user->name }}</div>
+                                                                                {{ $chat->is_admin == 1 ? auth()->user()->name : $chat->user->name }}
+                                                                            </div>
                                                                             {{ $chat->pesan }}
                                                                         </div>
                                                                     </div>
@@ -120,9 +123,11 @@
                                                                 <div class="mb-2" id="suggestion">
                                                                 </div>
                                                             </div>
-                                                            <form action="/live-chat" method="POST">
+                                                            <form action="/admintoko/live-chat" method="POST">
                                                                 @csrf
                                                                 <div class="input-group">
+                                                                    <input type="hidden" name="user"
+                                                                        value="{{ request('user') }}">
                                                                     <input type="text" id="pesan" name="pesan"
                                                                         class="form-control" autofocus
                                                                         placeholder="Masukkan Pesan Anda">

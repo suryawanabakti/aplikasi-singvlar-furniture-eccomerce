@@ -46,8 +46,8 @@
                                         @foreach ($transactions as $transaction)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $transaction->user->name }}</td>
-                                                <td>{{ $transaction->user->alamat }}</td>
+                                                <td>{{ $transaction->user->name ?? null }}</td>
+                                                <td>{{ $transaction->user->alamat ?? null }}</td>
                                                 <td>
                                                     <a href="javascript:void(0)" class="btn btn-info"
                                                         data-toggle="modal"

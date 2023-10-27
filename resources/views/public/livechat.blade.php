@@ -66,17 +66,19 @@
 
                                                 @foreach ($chats as $chat)
                                                     <div
-                                                        class="chat-message-{{ auth()->id() == $chat->user_id ? 'right' : 'left' }} pb-4">
+                                                        class="chat-message-{{ $chat->is_admin == 1 ? 'right' : 'left' }} pb-4">
                                                         <div>
-                                                            <img src="https://ui-avatars.com/api/?name={{ $chat->user->name }}"
+                                                            <img src="https://ui-avatars.com/api/?name={{ $chat->is_admin == 1 ? auth()->user()->name : $chat->user->name }}"
                                                                 class="rounded-circle mr-1" alt="Sharon Lessman"
                                                                 width="40" height="40">
                                                             <div class="text-muted small text-nowrap mt-2">
-                                                                {{ $chat->created_at->format('H:i') }}</div>
+                                                                {{ $chat->created_at->addHour(8)->format('H:i') }}
+                                                            </div>
                                                         </div>
                                                         <div class="flex-shrink-1  rounded py-2 px-3 ml-3">
-                                                            <div class="font-weight-bold mb-1">{{ $chat->user->name }}</div>
-
+                                                            <div class="font-weight-bold mb-1">
+                                                                {{ $chat->is_admin == 1 ? auth()->user()->name : $chat->user->name }}
+                                                            </div>
                                                             {{ $chat->pesan }}
                                                         </div>
                                                     </div>

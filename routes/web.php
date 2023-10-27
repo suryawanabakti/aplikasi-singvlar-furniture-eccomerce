@@ -210,7 +210,8 @@ Route::group(['middleware' => ['role:admintoko']], function () {
         }
 
         $transactions = Transaction::where('toko_id', auth()->user()->toko->id ?? 0)->get();
-        return view('admintoko.dashboard', compact('transactions'));
+        $users = User::role('customer')->get();
+        return view('admintoko.dashboard', compact('transactions', 'users'));
     })->name('dashboard');
 
     Route::controller(ProfileController::class)->group(function () {
@@ -244,6 +245,7 @@ Route::group(['middleware' => ['role:admintoko']], function () {
     });
 
     Route::get('/admintoko/live-chat', [AdminLiveChatController::class, 'index'])->name('admintoko.live-chat.index');
+    Route::post('/admintoko/live-chat', [AdminLiveChatController::class, 'store'])->name('admintoko.live-chat.store');
 });
 
 
