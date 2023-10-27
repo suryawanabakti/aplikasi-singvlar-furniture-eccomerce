@@ -32,6 +32,12 @@ class User extends Authenticatable
         return $this->hasOne(Toko::class);
     }
 
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

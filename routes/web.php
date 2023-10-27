@@ -245,6 +245,7 @@ Route::group(['middleware' => ['role:admintoko']], function () {
     });
 
     Route::get('/admintoko/live-chat', [AdminLiveChatController::class, 'index'])->name('admintoko.live-chat.index');
+    Route::get('/admintoko/live-chat/delete', [AdminLiveChatController::class, 'destroy'])->name('admintoko.live-chat.destroy');
     Route::post('/admintoko/live-chat', [AdminLiveChatController::class, 'store'])->name('admintoko.live-chat.store');
 });
 

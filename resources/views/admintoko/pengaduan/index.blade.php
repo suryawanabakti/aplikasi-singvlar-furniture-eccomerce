@@ -77,14 +77,20 @@
                                                     <div class="col-md-4">
                                                         <div class="row">
                                                             @foreach ($users as $user)
-                                                                <div class="col-md-12">
-                                                                    <a href="?user={{ $user->id }}"
-                                                                        class="text-decoration-none text-dark {{ $user->id == request('user') ? 'font-weight-bold' : '' }}">
-                                                                        <img alt="image"
-                                                                            src="https://ui-avatars.com/api/?name={{ $user->name }}"
-                                                                            class="rounded-circle mr-1">
-                                                                        {{ $user->name }}
-                                                                    </a>
+                                                                <div class="col-md-12 mb-4">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <a href="?user={{ $user->id }}"
+                                                                            class="text-decoration-none text-dark {{ $user->id == request('user') ? 'font-weight-bold' : '' }}">
+                                                                            <img alt="image"
+                                                                                src="https://ui-avatars.com/api/?name={{ $user->name }}"
+                                                                                class="rounded-circle mr-1">
+                                                                            {{ $user->name }}
+                                                                        </a>
+                                                                        <a href="/admintoko/live-chat/delete?user={{ $user->id }}"
+                                                                            onclick="return confirm('Apakah anda yakin membersihkan chat ini?')"
+                                                                            class="text-danger"><i
+                                                                                class="fas fa-trash"></i></a>
+                                                                    </div>
                                                                 </div>
                                                             @endforeach
                                                         </div>
@@ -119,21 +125,25 @@
 
                                                             </div>
 
-                                                            <div class="flex-grow-0 py-3 px-4 border-top">
-                                                                <div class="mb-2" id="suggestion">
+                                                            @if ($users->count() > 0)
+                                                                <div class="flex-grow-0 py-3 px-4 border-top">
+                                                                    <div class="mb-2" id="suggestion">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <form action="/admintoko/live-chat" method="POST">
-                                                                @csrf
-                                                                <div class="input-group">
-                                                                    <input type="hidden" name="user"
-                                                                        value="{{ request('user') }}">
-                                                                    <input type="text" id="pesan" name="pesan"
-                                                                        class="form-control" autofocus
-                                                                        placeholder="Masukkan Pesan Anda">
-                                                                    <button class="btn btn-primary">Send</button>
-                                                                </div>
-                                                            </form>
+                                                                <form action="/admintoko/live-chat" method="POST">
+                                                                    @csrf
+                                                                    <div class="input-group">
+                                                                        <input type="hidden" name="user"
+                                                                            value="{{ request('user') ?? $chats->first()->user_id }}">
+                                                                        <input type="text" id="pesan"
+                                                                            name="pesan" class="form-control"
+                                                                            autofocus placeholder="Masukkan Pesan Anda">
+                                                                        <button class="btn btn-primary">Send</button>
+                                                                    </div>
+                                                                </form>
+                                                            @else
+                                                                Belum ada pengaduan...
+                                                            @endif
 
                                                         </div>
 
