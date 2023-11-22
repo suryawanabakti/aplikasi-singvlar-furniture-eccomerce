@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nama_perusahaan')->nullable();
             $table->string('no_telepon')->nullable();
+            $table->integer('kabupatenkota_id');
             $table->timestamps();
         });
     }

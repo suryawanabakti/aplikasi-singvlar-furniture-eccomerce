@@ -10,14 +10,14 @@
         </x-slot>
 
         <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Login</h4>
+                <h4>Masuk</h4>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
@@ -47,17 +47,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
-                                id="remember-me">
-                            <label class="custom-control-label" for="remember-me">Remember Me</label>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                            Login
+                            Masuk
                         </button>
                     </div>
                 </form>
@@ -68,7 +61,7 @@
         </div>
 
         <div class="text-muted text-center">
-            Don't have an account? <a href="{{ route('register') }}">Create One</a>
+            Belum punya akun? <a href="{{ route('register') }}">Buat Akun</a>
         </div>
 
     </x-auth-card>

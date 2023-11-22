@@ -36,6 +36,7 @@
                                             <th>Alamat</th>
                                             <th>Daftar Produk</th>
                                             <th>Total bayar</th>
+                                            <th>Ongkir</th>
                                             <th>Metode</th>
                                             <th>Bukti Pembayaran</th>
                                             <th>Status</th>
@@ -56,6 +57,7 @@
 
                                                 </td>
                                                 <td>{{ $transaction->total }}</td>
+                                                <td>{{ $transaction->ongkir }}</td>
                                                 <td>{{ $transaction->metode }}</td>
                                                 <td>
                                                     <img src="{{ asset('uploads/buktiPembayaran/' . $transaction->bukti_pembayaran) }}"

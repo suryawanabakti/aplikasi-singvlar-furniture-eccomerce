@@ -40,7 +40,8 @@ class ProductController extends Controller
             'stock' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'berat' => 'required'
         ]);
 
         if ($request->has('image')) {
@@ -76,6 +77,7 @@ class ProductController extends Controller
             'stock' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'berat' => 'required'
         ]);
 
         if ($request->has('image')) {

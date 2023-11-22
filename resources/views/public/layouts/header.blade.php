@@ -83,7 +83,7 @@
                 @endauth
                 @guest
                     <a href="/register" class="nav-link d-flex lh-1 text-reset p-0 show" aria-label="Open user menu"
-                        aria-expanded="true">Register</a>
+                        aria-expanded="true">Daftar</a>
                     </a>
                 @endguest
 

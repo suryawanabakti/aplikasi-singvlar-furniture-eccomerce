@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('stock')->default(20);
             $table->string('image')->nullable();
             $table->text('description');
+            $table->double('berat')->default(0);
             $table->timestamps();
         });
     }

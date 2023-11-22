@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Toko::class);
             $table->integer('total');
-            $table->enum('metode', ['cod','transfer']);
+            $table->enum('metode', ['cod', 'transfer']);
             $table->string('bukti_pembayaran')->nullable();
-            $table->enum('status',['process','canceled','success']);
+            $table->enum('status', ['process', 'canceled', 'success']);
+            $table->integer('ongkir')->default(0);
             $table->timestamps();
         });
     }

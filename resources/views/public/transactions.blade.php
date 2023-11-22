@@ -68,6 +68,7 @@
                                         <th>Toko</th>
                                         <th>Total bayar</th>
                                         <th>Metode</th>
+                                        <th>Ongkir</th>
                                         <th>Bukti Pembayaran</th>
                                         <th>Status</th>
                                     </tr>
@@ -95,6 +96,7 @@
                                             <td>{{ $transaction->toko->name }}</td>
                                             <td>{{ $transaction->total }}</td>
                                             <td>{{ $transaction->metode }}</td>
+                                            <td>{{ $transaction->ongkir }}</td>
                                             <td>
                                                 @if ($transaction->bukti_pembayaran)
                                                     <img src="{{ asset('uploads/buktiPembayaran/' . $transaction->bukti_pembayaran) }}"

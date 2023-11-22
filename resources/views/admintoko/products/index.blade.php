@@ -70,8 +70,7 @@
                                             <div class="media-title"><a href="#">{{ $product->name }}</a></div>
                                             {{ $product->description }} <br>
                                             Stok: {{ $product->stock }} , Harga: Rp.{{ number_format($product->price) }}
-
-
+                                            , Berat: {{ $product->berat }} gram.
                                         </div>
                                     </li>
                                 @endforeach
@@ -118,6 +117,10 @@
                             <div class="form-group">
                                 <label for="name">Harga</label>
                                 <input type="number" class="form-control" name="price">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Berat (gram)</label>
+                                <input type="number" class="form-control" name="berat">
                             </div>
                             <div class="form-group">
                                 <label for="name">Deskripsi</label>
@@ -172,6 +175,11 @@
                                     <label for="name">Stok</label>
                                     <input type="number" class="form-control" name="stock"
                                         value="{{ $product->stock }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Berat (gram)</label>
+                                    <input type="number" class="form-control" name="berat"
+                                        value="{{ $product->berat }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Harga</label>

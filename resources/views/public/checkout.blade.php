@@ -47,7 +47,7 @@
                                 <div class="row">
                                     <form action="/transactions" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" name="toko_id" value="{{$checkouts[0]->product->toko->id }}">
+                                        <input type="hidden" name="toko_id" value="{{ $checkouts[0]->product->toko->id }}">
                                         <input type="hidden" name="total" value="{{ $checkouts->sum('total') }}">
                                         <div class="mb-3">
                                             <label for="">Metode Pembayaran</label>
@@ -57,11 +57,51 @@
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="">Bukti Pembayaran</label>
-                                            <input type="file" class="form-control" name="bukti_pembayaran">
+                                            <label for="">Ongkir</label>
+                                            <select name="ongkir" id="ongkir" class="form-control"
+                                                onchange="getTotalBayar()" required>
+                                                <option value="">Pilih Jenis Ongkir</option>
+                                                @foreach ($daftarOngkir as $ongkir)
+                                                    <option value=" {{ $ongkir['costs'][0]['cost'][0]['value'] }}">
+                                                        {!! $ongkir['name'] !!} -
+                                                        {{ $ongkir['costs'][0]['cost'][0]['value'] }} -
+                                                        ({{ $ongkir['costs'][0]['cost'][0]['etd'] }} Hari)
+                                                    </option>
+                                                @endforeach
+                                                @foreach ($daftarOngkir2 as $ongkir2)
+                                                    <option value=" {{ $ongkir2['costs'][0]['cost'][0]['value'] }}">
+                                                        {!! $ongkir2['name'] !!} -
+                                                        {{ $ongkir2['costs'][0]['cost'][0]['value'] }} -
+                                                        ({{ $ongkir2['costs'][0]['cost'][0]['etd'] }} Hari)
+                                                    </option>
+                                                @endforeach
+                                                @foreach ($daftarOngkir3 as $ongkir)
+                                                    <option value=" {{ $ongkir['costs'][0]['cost'][0]['value'] }}">
+                                                        {!! $ongkir['name'] !!} -
+                                                        {{ $ongkir['costs'][0]['cost'][0]['value'] }} -
+                                                        ({{ $ongkir['costs'][0]['cost'][0]['etd'] }})
+                                                    </option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="">Bukti Pembayaran *Max 2MB.</label>
+                                            <input type="file" class="form-control" name="bukti_pembayaran">
+                                            <small class="text-danger">
+                                                @if ($errors->any())
+                                                    Bukti pembayaran tidak boleh lebih dari 2MB.
+                                                @endif
+                                            </small>
+                                        </div>
+
+
+
                                         <div class="col-md-12 mt-2"> Total Bayar : IDR
-                                            {{ number_format($checkouts->sum('total')) }}</div>
+                                            <span id="totalBayar"></span>
+                                            {{-- {{ number_format($checkouts->sum('total')) }} --}}
+                                        </div>
                                         <div class="col-md-2 mt-4"> <button type="submit" class="btn btn-primary">Bayar
                                             </button> </div>
                                     </form>
@@ -79,6 +119,13 @@
 
 @push('js')
     <script>
+        function getTotalBayar() {
+            var ongkir = parseInt($('#ongkir').val())
+            var sumTotal = parseInt('{{ $checkouts->sum('total') }}')
+
+
+            $('#totalBayar').html(`${ongkir + sumTotal}`)
+        }
         // $('.cart_id').on('change', () => {
         //     $('input[name="cart_id"]:checked').each(function() {
         // console.log(this.value); 

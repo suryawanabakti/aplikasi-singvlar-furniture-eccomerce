@@ -47,7 +47,7 @@
                                 <li class="list-inline-item">
                                     Copyright &copy; 2023
                                     <a href="." class="link-secondary">Unitama</a>.
-                                    All rights reserved.
+
                                 </li>
 
                             </ul>

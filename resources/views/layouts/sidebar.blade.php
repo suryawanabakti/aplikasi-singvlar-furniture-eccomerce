@@ -19,7 +19,7 @@
             <li><a class="nav-link" href="{{ route('adminsuper.categories.index') }}"><i class="fas fa-box"></i>
                     <span>Category</span></a></li>
             <li><a class="nav-link" href="{{ route('adminsuper.transactions.index') }}"><i class="fas fa-exchange-alt"></i>
-                    <span>Transaction</span></a></li>
+                    <span>Tranksaksi</span></a></li>
         @endrole
 
         @role('admintoko')
@@ -33,14 +33,14 @@
                     <span>Category</span></a></li>
             <li class=" {{ Request::is('admintoko/products*') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admintoko.products.index') }}"><i class="fas fa-box"></i>
-                    <span>Products</span></a></li>
+                    <span>Barang</span></a></li>
             <li class=" {{ Request::is('admintoko/profile') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admintoko.profile.index') }}"><i class="fas fa-user"></i> <span>Profile</span></a>
+                    href="{{ route('admintoko.profile.index') }}"><i class="fas fa-user"></i> <span>Profil</span></a>
             </li>
-            <li class="menu-header">Transaction</li>
+            <li class="menu-header">Transaksi</li>
             <li class="{{ Request::is('admintoko/transactions') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admintoko.transactions.index') }}"><i class="fas fa-exchange-alt"></i>
-                    <span>Transactions <sup
+                    <span>Transaksi <sup
                             class="badge badge-primary">{{ DB::table('transactions')->where('status', 'process')->count() }}</sup></span></a>
             </li>
             <li class="menu-header">Misc</li>

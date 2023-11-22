@@ -28,6 +28,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 use RealRashid\SweetAlert\Facades\Alert;
 
 /*
@@ -56,6 +57,16 @@ Route::get('/', function (Request $request) {
     $banners = Banner::all();
     return view('public.home', compact('products', 'title', 'categories', 'carts', 'banners'));
 })->name('home');
+
+Route::get('/test', function () {
+    return $daftarProvinsi = RajaOngkir::kota()->all();
+    return  $daftarProvinsi = RajaOngkir::ongkosKirim([
+        'origin'        => 254,     // ID kota/kabupaten asal
+        'destination'   => 80,      // ID kota/kabupaten tujuan
+        'weight'        => 1300,    // berat barang dalam gram
+        'courier'       => 'pos'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+    ])->get();
+});
 
 Route::get('/kontak', function (Request $request) {
     $carts = Cart::where('user_id', auth()->user()->id ?? 0)
@@ -126,7 +137,34 @@ Route::get('/checkout', function (Request $request) {
         //  $checkouts =  DB::select('select *,products.name AS nama_produk ,tokos.id AS toko_id,products.user_id AS product_user_id,carts.user_id as carts_user_id from carts  inner join products on carts.product_id = products.id inner join tokos on tokos.user_id = products.user_id where carts.user_id = '. auth()->user()->id . ' AND tokos.id = '. $toko_id);\
 
         $checkouts = Cart::with('product', 'toko')->where('toko_id', $toko_id)->where('user_id', auth()->id())->where('status', 'process')->get();
-        return view('public.checkout', compact('checkouts', 'carts'));
+
+        $berat = 0;
+        foreach ($checkouts as $checkout) {
+            $berat = $berat + $checkout->product->berat;
+        }
+
+        $daftarOngkir = RajaOngkir::ongkosKirim([
+            'origin'        => 254,     // ID kota/kabupaten asal
+            'destination'   => auth()->user()->kabupatenkota_id,      // ID kota/kabupaten tujuan
+            'weight'        => $berat,    // berat barang dalam gram
+            'courier'       => 'jne'   // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        ])->get();
+
+        $daftarOngkir2 = RajaOngkir::ongkosKirim([
+            'origin'        => 254,     // ID kota/kabupaten asal
+            'destination'   => auth()->user()->kabupatenkota_id,      // ID kota/kabupaten tujuan
+            'weight'        => $berat,    // berat barang dalam gram
+            'courier'       => 'tiki'   // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        ])->get();
+
+        $daftarOngkir3 = RajaOngkir::ongkosKirim([
+            'origin'        => 254,     // ID kota/kabupaten asal
+            'destination'   => auth()->user()->kabupatenkota_id,      // ID kota/kabupaten tujuan
+            'weight'        => $berat,    // berat barang dalam gram
+            'courier'       => 'pos'   // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        ])->get();
+
+        return view('public.checkout', compact('checkouts', 'carts', 'daftarOngkir', 'daftarOngkir2', 'daftarOngkir3'));
     } else {
         Alert::error('Gagal Checkout', 'tolong ceklist setidaknya SATU produk satu produk');
         return back();
@@ -161,7 +199,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::controller(TransactionController::class)->group(function () {
         Route::get('/transactions', 'index')->name('transactions.index');
-
         Route::post('/transactions', 'store')->name('transactions.store');
     });
 });

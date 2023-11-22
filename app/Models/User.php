@@ -24,7 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'no_telepon',
-        'nama_perusahaan'
+        'nama_perusahaan',
+        'kabupatenkota_id'
     ];
 
     public function toko()

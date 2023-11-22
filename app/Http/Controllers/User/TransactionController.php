@@ -21,16 +21,15 @@ class TransactionController extends Controller
             ->where('status', 'process')
             ->orderBy('created_at', 'desc')
             ->get() ?? null;
-
-
         $transactions = Transaction::where('user_id', auth()->id())->get();
         return view('public.transactions', compact('carts', 'transactions'));
     }
 
-
-
     public function store(Request $request)
     {
+        $request->validate([
+            'bukti_pembayaran' => 'image|max:2048'
+        ]);
         $buktiPembayaranName = null;
         if ($request->has('bukti_pembayaran')) {
             $buktiPembayaran = $request->bukti_pembayaran;
@@ -49,9 +48,7 @@ class TransactionController extends Controller
         $carts = Cart::with('product', 'toko')->where('toko_id', $request->toko_id)->where('user_id', auth()->id())->where('status', 'process')->get();
 
         foreach ($carts as $cart) {
-
             $product =  Product::where('id', $cart->product->id)->first();
-
             $product->update([
                 "stock" => $product->stock - $cart->jumlah
             ]);
@@ -80,7 +77,8 @@ class TransactionController extends Controller
             'toko_id' => $request->toko_id,
             'total' => $request->total,
             'metode' => $request->metode,
-            'bukti_pembayaran' => $buktiPembayaranName
+            'bukti_pembayaran' => $buktiPembayaranName,
+            'ongkir' => $request->ongkir
         ]);
 
         $update = [

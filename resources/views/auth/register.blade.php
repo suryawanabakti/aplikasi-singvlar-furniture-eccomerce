@@ -37,6 +37,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="">Kabupaten/Kota</label>
+                        <select name="kabupatenkota" id="kabupatenkota" class="form-control select2">
+                            @foreach ($daftarKota as $kota)
+                                <option value="{{ $kota['city_id'] }}">{{ $kota['city_name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="name">No.Telpon / WhatsApp</label>
                         <input id="name" type="text" class="form-control" name="no_telepon" tabindex="1"
                             required autofocus>
@@ -126,7 +134,8 @@
         </div>
 
         <div class="mt-5 text-muted text-center">
-            Do you have an account? <a href="{{ route('login') }}">Login here</a>
+            Apakah kamu sudah punya akun? <a href="{{ route('login') }}">Masuk disini</a>
         </div>
     </x-auth-card>
+
 </x-guest-layout>

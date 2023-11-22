@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        // 254
+        $daftarKota = RajaOngkir::kota()->all();
+        return view('auth.register', compact('daftarKota'));
     }
 
     /**
@@ -41,7 +44,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required'],
             'no_telepon' => ['required'],
-            'nama_perusahaan' => ['required']
+            'nama_perusahaan' => ['required'],
+            'kabupatenkota' => ['required'],
         ]);
 
         $user = User::create([
@@ -51,6 +55,7 @@ class RegisteredUserController extends Controller
             'nama_perusahaan' => $request->nama_perusahaan,
             'no_telepon' => $request->no_telepon,
             'password' => Hash::make($request->password),
+            'kabupatenkota_id' => $request->kabupatenkota
         ]);
 
         $user->assignRole($request->role);
